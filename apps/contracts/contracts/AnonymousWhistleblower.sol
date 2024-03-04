@@ -18,7 +18,7 @@ contract AnonymousWhistleblower {
     event Post();
     event Vote();
 
-    BinaryIMTData group;
+    BinaryIMTData public group;
     // key: post id, value: votes
     mapping (uint256 => uint256) votesByPost;
     // key: commitment => key: post id, value: voted or not
@@ -33,12 +33,12 @@ contract AnonymousWhistleblower {
     }
 
     // TODO: record post and postId by emitting Post event
-    function sendPost(IMTProof calldata proof, string memory post) external {
+    function sendPost(IMTProof calldata proof, string memory title, string memory content) external {
         if (!group._verify(proof.leaf, proof.proofSiblings, proof.proofPathIndices)) {
-            revert InvalidMember(proof);
+            revert InvalidMember(proof.leaf);
         }
-
-        uint256 postId = uint256(keccak256(abi.encodePacked(post)));
+        // using hash(commitment, title) to get the unique id for post
+        uint256 postId = uint256(keccak256(abi.encodePacked(proof.leaf, title)));
     }
 
     // TODO: update membersVoted mapping & votesByPost
