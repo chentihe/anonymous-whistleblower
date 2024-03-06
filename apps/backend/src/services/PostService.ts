@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import { VoteType } from '../types';
+import { ethers } from 'ethers';
 
 export default class PostService {
     private prisma: PrismaClient;
@@ -8,11 +9,16 @@ export default class PostService {
         this.prisma = prisma;
     }
 
+    // TODO: need to send tx to eth
     async createPost(commitment: bigint, title: string, content: string): Promise<any> {
+        const postId = BigInt(ethers.solidityPackedKeccak256(["uint", "string"], [commitment, title]));
         return this.prisma.post.create({
-            author: commitment.toString(),
-            title: title,
-            content: content,
+            data: {
+                postId: postId.toString(),
+                author: commitment.toString(),
+                title: title,
+                content: content,
+            }
         });
     }
 
@@ -24,31 +30,41 @@ export default class PostService {
     async getPostsByCommitment(commitment: bigint) {
         return this.prisma.post.findMany({
             where: {
-                commitment: commitment
+                author: commitment.toString()
             }
         });
     }
 
-    async sendVote(id: string, vote: VoteType): Promise<any> {
-        // TODO: verify member voted or not
-
-        const post = this.prisma.post.findUnique({
+    // TODO: need to send tx to eth
+    async sendVote(id: string, commitment: bigint, vote: VoteType): Promise<any> {
+        const post = await this.prisma.post.findFirstOrThrow({
             where: {
-                id: id
+                postId: id
             }
         });
+
+        if (post.voters.includes(commitment.toString())) {
+            throw new Error("the user is voted for the post");
+        }
 
         switch (vote) {
             case VoteType.UpVote:
                 post.votes += 1;
+                post.voters.push(commitment.toString());
                 break;
             case VoteType.DownVote:
                 post.votes -= 1;
+                post.voters.push(commitment.toString());
                 break;
             default:
                 throw new Error("invalid vote type");
         }
         
-        return this.prisma.post.update(post);
+        return this.prisma.post.update({
+            where: {
+                id: post.id,
+            },
+            data: post,
+        });
     }
 }
