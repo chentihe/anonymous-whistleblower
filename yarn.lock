@@ -3624,7 +3624,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@zk-kit/imt@npm:2.0.0-beta.2":
+"@zk-kit/imt@npm:2.0.0-beta.2, @zk-kit/imt@npm:^2.0.0-beta.2":
   version: 2.0.0-beta.2
   resolution: "@zk-kit/imt@npm:2.0.0-beta.2"
   checksum: 10/b99ab587f4a5f147531160feb9b27e5505659d5bb34fe2cbbc8e3d3bedc95febb3cf1ffcd4f75570feb03a2d929063e9b5f9d638ac2c1bba0204ca9cdc1fa2c0
@@ -9482,7 +9482,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"poseidon-lite@npm:0.2.0":
+"poseidon-lite@npm:0.2.0, poseidon-lite@npm:^0.2.0":
   version: 0.2.0
   resolution: "poseidon-lite@npm:0.2.0"
   checksum: 10/63c7668b480ee3d57aaca0eda7e56d563ab2bfcc40bbce0e4bccdc9deed4c0d68255749356e328b622ce8715b1f1ba689fe1a86ca78eb1056a51a18daa252ee1
@@ -10078,11 +10078,13 @@ __metadata:
     "@tableland/sdk": "npm:^5.2.0"
     "@types/express": "npm:4.17.21"
     "@types/node": "npm:20.11.24"
+    "@zk-kit/imt": "npm:^2.0.0-beta.2"
     d1-orm: "npm:^0.9.0"
     dotenv: "npm:^16.4.5"
     ethers: "npm:^5.7.2"
     express: "npm:4.18.3"
     fs: "npm:^0.0.1-security"
+    poseidon-lite: "npm:^0.2.0"
     ts-node: "npm:10.9.2"
     typescript: "npm:5.3.3"
   languageName: unknown

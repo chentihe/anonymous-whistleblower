@@ -1,14 +1,17 @@
 import { VoteSchema, VoteType } from '../types';
 import PostDao from '../daos/PostDao';
 import VoteDao from '../daos/VoteDao';
+import { Contract } from 'ethers';
 
 export default class VoteService {
     private postDao;
     private voteDao;
+    private contract
 
-    constructor(postDao: PostDao, voteDao: VoteDao) {
+    constructor(postDao: PostDao, voteDao: VoteDao, contract: Contract) {
         this.postDao = postDao;
         this.voteDao = voteDao;
+        this.contract = contract;
     }
 
     // TODO: need to send tx to eth
@@ -22,7 +25,7 @@ export default class VoteService {
         const newVote: VoteSchema = {
             postId: id,
             voter: commitment,
-            result: null
+            result: null,
         };
 
         switch (vote) {
@@ -39,7 +42,7 @@ export default class VoteService {
         }
 
         await this.postDao.updateVotes(id, post.votes);
-        
+
         return this.voteDao.sendVote(newVote);
     }
 }
