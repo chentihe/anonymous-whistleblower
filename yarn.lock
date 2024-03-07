@@ -49,6 +49,33 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@async-generators/from-emitter@npm:^0.3.0":
+  version: 0.3.0
+  resolution: "@async-generators/from-emitter@npm:0.3.0"
+  dependencies:
+    "@async-generators/subject": "npm:^0.4"
+    "@async-generators/terminator": "npm:^0.4"
+  checksum: 10/6b1518ccb5f0f6b7bc1126bc7f0b2e226ee6c250795ea37631aa60b70fddc97c3b4ae0bfb9c2b418421f508e2ed1011613574edb5a7e1064bcd8118192744ea4
+  languageName: node
+  linkType: hard
+
+"@async-generators/subject@npm:^0.4":
+  version: 0.4.0
+  resolution: "@async-generators/subject@npm:0.4.0"
+  dependencies:
+    "@async-generators/terminator": "npm:^0.4.0"
+    events: "npm:^1.1.1"
+  checksum: 10/7aa719ab7371f8cf5fe02624713cea970db548f5f3d59f0802c816fa229921a9eba83121e019c680fc72bfd464acb93328d65b006d6989f135769b16b7aca703
+  languageName: node
+  linkType: hard
+
+"@async-generators/terminator@npm:^0.4, @async-generators/terminator@npm:^0.4.0":
+  version: 0.4.0
+  resolution: "@async-generators/terminator@npm:0.4.0"
+  checksum: 10/adaabd90499becfae8374da278a4d5a394c690913ef17940c5d8189f10f30f8e54e0ea434e1737eebb7c7aebc71054320b57f87299273791eca4df601e46b7b3
+  languageName: node
+  linkType: hard
+
 "@babel/code-frame@npm:^7.0.0, @babel/code-frame@npm:^7.10.4, @babel/code-frame@npm:^7.23.5":
   version: 7.23.5
   resolution: "@babel/code-frame@npm:7.23.5"
@@ -2509,6 +2536,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@openzeppelin/contracts@npm:4.8.3":
+  version: 4.8.3
+  resolution: "@openzeppelin/contracts@npm:4.8.3"
+  checksum: 10/276481d76afdc71690bd4204cdd47e6add30d183e20df57c76e5ffc481c783ca756842f3b0ac7e3e6336217dcde448cef8279fafae1176ac436ad86594c4bdc2
+  languageName: node
+  linkType: hard
+
 "@pkgjs/parseargs@npm:^0.11.0":
   version: 0.11.0
   resolution: "@pkgjs/parseargs@npm:0.11.0"
@@ -2540,64 +2574,6 @@ __metadata:
     "@pnpm/network.ca-file": "npm:^1.0.1"
     config-chain: "npm:^1.1.11"
   checksum: 10/45422fecc7ed49e5254eef744576625e27cdebccce930f42c66cf2fb70443fc24f506c3fcf4859e6371677ceb144feb45e925ec14774b54588b89806b32dea9a
-  languageName: node
-  linkType: hard
-
-"@prisma/client@npm:5.10.2":
-  version: 5.10.2
-  resolution: "@prisma/client@npm:5.10.2"
-  peerDependencies:
-    prisma: "*"
-  peerDependenciesMeta:
-    prisma:
-      optional: true
-  checksum: 10/c608d872ed428fbdfd16fea6dbe313134901f02a12b75887384001718ae8d14e58b01f6968f9f4bdc362a5ad54ea56e7b7c905b4ac8022af1845f588ded50124
-  languageName: node
-  linkType: hard
-
-"@prisma/debug@npm:5.10.2":
-  version: 5.10.2
-  resolution: "@prisma/debug@npm:5.10.2"
-  checksum: 10/300219b9f419a1786caf7ae3d60467a90eabdfc003c87bfc7c94787fac0bdd40fd00153ab36de46a1fbbc51e4b853dcf94a70900e23f53744918d98c16eca4d8
-  languageName: node
-  linkType: hard
-
-"@prisma/engines-version@npm:5.10.0-34.5a9203d0590c951969e85a7d07215503f4672eb9":
-  version: 5.10.0-34.5a9203d0590c951969e85a7d07215503f4672eb9
-  resolution: "@prisma/engines-version@npm:5.10.0-34.5a9203d0590c951969e85a7d07215503f4672eb9"
-  checksum: 10/2d417c78be5ab97d7c2b58b550ef70336b3f3e44e27b6df2feb9084c5c6c69be74b1cf8fdb8217d6aebbf6f34fe22c5d80339ba8bd8aa279a9d6eb2543dcc0b9
-  languageName: node
-  linkType: hard
-
-"@prisma/engines@npm:5.10.2":
-  version: 5.10.2
-  resolution: "@prisma/engines@npm:5.10.2"
-  dependencies:
-    "@prisma/debug": "npm:5.10.2"
-    "@prisma/engines-version": "npm:5.10.0-34.5a9203d0590c951969e85a7d07215503f4672eb9"
-    "@prisma/fetch-engine": "npm:5.10.2"
-    "@prisma/get-platform": "npm:5.10.2"
-  checksum: 10/f9d8feffb89452556de3abe5134e9cb69461d3bfc22b3b3ac6ebe84ce7958470d8797e6ba31bf3b7427fbac654ace0b957a12e39b1227084f0f9bc46abe52d37
-  languageName: node
-  linkType: hard
-
-"@prisma/fetch-engine@npm:5.10.2":
-  version: 5.10.2
-  resolution: "@prisma/fetch-engine@npm:5.10.2"
-  dependencies:
-    "@prisma/debug": "npm:5.10.2"
-    "@prisma/engines-version": "npm:5.10.0-34.5a9203d0590c951969e85a7d07215503f4672eb9"
-    "@prisma/get-platform": "npm:5.10.2"
-  checksum: 10/164f7b54fab7d1cd691cf276b10f8da032fb147d533450eaa2689866a236f76c6fc687900a9c9d5167bfea3db52296b5ad4f7de70905437744c6529c5d86ce48
-  languageName: node
-  linkType: hard
-
-"@prisma/get-platform@npm:5.10.2":
-  version: 5.10.2
-  resolution: "@prisma/get-platform@npm:5.10.2"
-  dependencies:
-    "@prisma/debug": "npm:5.10.2"
-  checksum: 10/6c2f4ad8c193a93235e6eee9caab3afbec1e9f26898ede73ad4230730e60caa622a62e2facff614a2bef25f78c5167181ca5c8f4883f80bb30fb8ba0fede5d94
   languageName: node
   linkType: hard
 
@@ -2958,6 +2934,41 @@ __metadata:
   dependencies:
     defer-to-connect: "npm:^2.0.1"
   checksum: 10/fc9cb993e808806692e4a3337c90ece0ec00c89f4b67e3652a356b89730da98bc824273a6d67ca84d5f33cd85f317dcd5ce39d8cc0a2f060145a608a7cb8ce92
+  languageName: node
+  linkType: hard
+
+"@tableland/evm@npm:^4.5.0":
+  version: 4.5.1
+  resolution: "@tableland/evm@npm:4.5.1"
+  dependencies:
+    "@openzeppelin/contracts": "npm:4.8.3"
+  checksum: 10/34407efc18296beb1a5c7af2f0972a482594aea70b3ad034a73d1f2e521d2abba010a182ea8e4a68a4c324ba7e2ce88fc9acb666d9c23ad50ce568e9c76fbd2b
+  languageName: node
+  linkType: hard
+
+"@tableland/node-helpers@npm:^0.0.2":
+  version: 0.0.2
+  resolution: "@tableland/node-helpers@npm:0.0.2"
+  checksum: 10/bb6a2843dcfb587f7f998ba335ad5ad623b9735703a95086f3f01ab8d558bb3bdc3f9009a3284e0e6ffa530466e88791a8b97f455721c25eefa6065ccead4e7f
+  languageName: node
+  linkType: hard
+
+"@tableland/sdk@npm:^5.2.0":
+  version: 5.2.0
+  resolution: "@tableland/sdk@npm:5.2.0"
+  dependencies:
+    "@async-generators/from-emitter": "npm:^0.3.0"
+    "@tableland/evm": "npm:^4.5.0"
+    "@tableland/sqlparser": "npm:^1.3.0"
+    ethers: "npm:^5.7.2"
+  checksum: 10/0303a649717627dea8f75701a9255f65e9094f538c6141ccdd0b720061448e2f5dd987a509889e6bfcd8101c513edbbde1f1b52b1e2a705c006d77258f05efb8
+  languageName: node
+  linkType: hard
+
+"@tableland/sqlparser@npm:^1.3.0":
+  version: 1.3.0
+  resolution: "@tableland/sqlparser@npm:1.3.0"
+  checksum: 10/495d528e3a2d720eb0826fdf49880f688e79cc96d839c851582ffac9fc13b81c80da8f6c838aa980f785219a546f3a56353d53a359fc5234ce70586ca669f6a2
   languageName: node
   linkType: hard
 
@@ -5106,6 +5117,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"d1-orm@npm:^0.9.0":
+  version: 0.9.0
+  resolution: "d1-orm@npm:0.9.0"
+  checksum: 10/ce4782a4ec652a624bc324c34ea55576de37b3d2951c5eeabf4f15e43e136690a52a56d3e92009741f1f5956b56d58b8a944261201b8be6c84364541064fa086
+  languageName: node
+  linkType: hard
+
 "damerau-levenshtein@npm:^1.0.8":
   version: 1.0.8
   resolution: "damerau-levenshtein@npm:1.0.8"
@@ -6227,6 +6245,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"events@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "events@npm:1.1.1"
+  checksum: 10/524355c4364b4851d53ccf4fdab9570e3953e1f64ebca15554f33e50bebb4e71ab947ac0dee6f4ed5a567ff2eda54b0489b278b4fb7c8ec1f4982150079dfd40
+  languageName: node
+  linkType: hard
+
 "evp_bytestokey@npm:^1.0.3":
   version: 1.0.3
   resolution: "evp_bytestokey@npm:1.0.3"
@@ -6643,6 +6668,13 @@ __metadata:
   version: 1.0.0
   resolution: "fs.realpath@npm:1.0.0"
   checksum: 10/e703107c28e362d8d7b910bbcbfd371e640a3bb45ae157a362b5952c0030c0b6d4981140ec319b347bce7adc025dd7813da1ff908a945ac214d64f5402a51b96
+  languageName: node
+  linkType: hard
+
+"fs@npm:^0.0.1-security":
+  version: 0.0.1-security
+  resolution: "fs@npm:0.0.1-security"
+  checksum: 10/53c6230e1faae9fa32c1df82c16a84b51b1243d20f3da2b64bd110bb472b73b9185169b703e008356e3cdc92d155088b617d9d39a63b5227a30b3621baad7f5d
   languageName: node
   linkType: hard
 
@@ -9534,17 +9566,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prisma@npm:5.10.2":
-  version: 5.10.2
-  resolution: "prisma@npm:5.10.2"
-  dependencies:
-    "@prisma/engines": "npm:5.10.2"
-  bin:
-    prisma: build/index.js
-  checksum: 10/5c1de44b5d52862581b9c5a38eb190081579db2a71b14d0004dae8a79a8b4e893cf3c988402efa92b6e807a7e1f30880035895e712b3d402112ceb25e6392b59
-  languageName: node
-  linkType: hard
-
 "proc-log@npm:^3.0.0":
   version: 3.0.0
   resolution: "proc-log@npm:3.0.0"
@@ -10053,13 +10074,15 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "rest-express@workspace:apps/backend"
   dependencies:
-    "@prisma/client": "npm:5.10.2"
+    "@tableland/node-helpers": "npm:^0.0.2"
+    "@tableland/sdk": "npm:^5.2.0"
     "@types/express": "npm:4.17.21"
     "@types/node": "npm:20.11.24"
+    d1-orm: "npm:^0.9.0"
     dotenv: "npm:^16.4.5"
-    ethers: "npm:^6.11.1"
+    ethers: "npm:^5.7.2"
     express: "npm:4.18.3"
-    prisma: "npm:5.10.2"
+    fs: "npm:^0.0.1-security"
     ts-node: "npm:10.9.2"
     typescript: "npm:5.3.3"
   languageName: unknown
