@@ -4,9 +4,9 @@ import { IMTMerkleProof } from '@zk-kit/imt';
 import IMTService from './IMTService';
 
 export default class PostService {
-    private postDao;
-    private contract;
-    private imtService;
+    private postDao: PostDao;
+    private contract: Contract;
+    private imtService: IMTService;
 
     constructor(postDao: PostDao, contract: Contract, imtService: IMTService) {
         this.postDao = postDao;

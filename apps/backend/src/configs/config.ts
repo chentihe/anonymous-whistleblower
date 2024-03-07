@@ -7,6 +7,8 @@ import VoteDao from "../daos/VoteDao";
 import PostService from "../services/PostService";
 import VoteService from "../services/VoteService";
 import AnonymousWhistlerArtifact from "../../../contracts/artifacts/contracts/Feedback.sol/Feedback.json";
+import { fetchMerkleTree, listenSignup } from "./userMerkleTree";
+import IMTService from "../services/IMTService";
 
 const initialDb = async (db: Database) => {
     await db.prepare(`CREATE TABLE IF NOT EXISTS posts (
@@ -51,9 +53,13 @@ export const loadConfig = async () => {
   
     const postDao = new PostDao(orm);
     const voteDao = new VoteDao(orm);
+    const imt = await fetchMerkleTree(contract);
   
-    const postService = new PostService(postDao, contract);
-    const voteService = new VoteService(postDao, voteDao, contract);
+    const imtService = new IMTService(imt);
+    const postService = new PostService(postDao, contract, imtService);
+    const voteService = new VoteService(postDao, voteDao, contract, imtService);
+
+    listenSignup(contract, imtService);
   
     return {
       postService: postService,

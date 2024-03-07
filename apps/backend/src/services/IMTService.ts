@@ -1,7 +1,7 @@
 import { IMT, IMTMerkleProof } from '@zk-kit/imt';
 
 export default class IMTService {
-    private imt;
+    private imt: IMT;
 
     constructor(imt: IMT) {
         this.imt = imt;

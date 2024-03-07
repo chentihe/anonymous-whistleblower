@@ -2,28 +2,36 @@ import { VoteSchema, VoteType } from '../types';
 import PostDao from '../daos/PostDao';
 import VoteDao from '../daos/VoteDao';
 import { Contract } from 'ethers';
+import IMTService from './IMTService';
+import { IMTMerkleProof } from '@zk-kit/imt';
 
 export default class VoteService {
-    private postDao;
-    private voteDao;
-    private contract
+    private postDao: PostDao;
+    private voteDao: VoteDao;
+    private contract: Contract;
+    private imtService: IMTService;
 
-    constructor(postDao: PostDao, voteDao: VoteDao, contract: Contract) {
+    constructor(postDao: PostDao, voteDao: VoteDao, contract: Contract, imtService: IMTService) {
         this.postDao = postDao;
         this.voteDao = voteDao;
         this.contract = contract;
+        this.imtService = imtService;
     }
 
     // TODO: need to send tx to eth
-    async sendVote(id: string, commitment: string, vote: VoteType): Promise<any> {
-        const post = await this.postDao.getPostById(id);
+    async sendVote(proof: IMTMerkleProof, postId: string, commitment: string, vote: VoteType): Promise<any> {
+        if (!this.imtService.verifyProof(proof)) {
+            throw new Error("invalid proof");
+        }
+
+        const post = await this.postDao.getPostById(postId);
 
         if (post == null || post == undefined) {
-            throw new Error(`invalid post ${id}`);
+            throw new Error(`invalid post ${postId}`);
         }
 
         const newVote: VoteSchema = {
-            postId: id,
+            postId: postId,
             voter: commitment,
             result: null,
         };
@@ -41,7 +49,12 @@ export default class VoteService {
                 throw new Error("invalid vote type");
         }
 
-        await this.postDao.updateVotes(id, post.votes);
+        await this.contract.sendVote({
+            leaf: proof.leaf,
+            proofSiblings: proof.siblings,
+            proofPathIndices: proof.pathIndices,
+        }, postId);
+        await this.postDao.updateVotes(postId, post.votes);
 
         return this.voteDao.sendVote(newVote);
     }
