@@ -2,13 +2,14 @@ import { jsonFileAliases } from "@tableland/node-helpers";
 import { Database } from "@tableland/sdk";
 import { D1Orm } from "d1-orm";
 import { ethers } from "ethers";
+import AnonymousWhistlerArtifact from "../../../contracts/artifacts/contracts/Feedback.sol/Feedback.json";
+import { fetchMerkleTree } from "./userMerkleTree";
 import PostDao from "../daos/PostDao";
 import VoteDao from "../daos/VoteDao";
+import IMTService from "../services/IMTService";
 import PostService from "../services/PostService";
 import VoteService from "../services/VoteService";
-import AnonymousWhistlerArtifact from "../../../contracts/artifacts/contracts/Feedback.sol/Feedback.json";
-import { fetchMerkleTree, listenSignup } from "./userMerkleTree";
-import IMTService from "../services/IMTService";
+import UserService from "../services/UserService";
 
 const initialDb = async (db: Database) => {
     await db.prepare(`CREATE TABLE IF NOT EXISTS posts (
@@ -58,11 +59,12 @@ export const loadConfig = async () => {
     const imtService = new IMTService(imt);
     const postService = new PostService(postDao, contract, imtService);
     const voteService = new VoteService(postDao, voteDao, contract, imtService);
+    const userService = new UserService(contract, imtService);
 
-    listenSignup(contract, imtService);
-  
     return {
       postService: postService,
       voteService: voteService,
+      userService: userService,
+      imtService: imtService,
     };
   }

@@ -9,9 +9,9 @@ export default (
     app.post(
         "/api/posts",
         errorHandler(async (req, res, _) => {
-            const { id, commitment, vote } = req.body;
+            const { proof, id, commitment, vote } = req.body;
             
-            const newVote = await config.voteService.sendVote(id, commitment, vote as VoteType);
+            const newVote = await config.voteService.sendVote(proof, id, commitment, vote as VoteType);
 
             res.status(201).json({ status: 'success', vote: newVote });
         }),

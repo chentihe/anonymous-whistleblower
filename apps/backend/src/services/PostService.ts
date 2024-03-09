@@ -2,6 +2,7 @@ import { Contract, ethers } from 'ethers';
 import PostDao from '../daos/PostDao';
 import { IMTMerkleProof } from '@zk-kit/imt';
 import IMTService from './IMTService';
+import { InvalidProofError } from '../types';
 
 export default class PostService {
     private postDao: PostDao;
@@ -14,12 +15,12 @@ export default class PostService {
         this.imtService = imtService;
     }
 
-    // TODO: need to send tx to eth
-    async createPost(proof: IMTMerkleProof, commitment: bigint, title: string, content: string): Promise<any> {
+    async createPost(proof: IMTMerkleProof, title: string, content: string): Promise<any> {
         if (!this.imtService.verifyProof(proof)) {
-            throw new Error("invalid proof");
+            throw InvalidProofError;
         };
-
+        
+        const commitment = proof.leaf;
         const postId = BigInt(ethers.utils.solidityKeccak256(["uint", "string"], [commitment, title]));
         const post = {
             id: postId.toString(),
@@ -28,11 +29,12 @@ export default class PostService {
             author: commitment.toString(),
         };
 
-        await this.contract.sendPost({
+        const tx = await this.contract.sendPost({
             leaf: proof.leaf,
             proofSiblings: proof.siblings,
             proofPathIndices: proof.pathIndices,
         }, title, content);
+        await tx.wait();
 
         return this.postDao.createPost(post);
     }

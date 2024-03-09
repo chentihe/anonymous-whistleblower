@@ -8,28 +8,14 @@ export class InternalError extends Error {
 }
 
 // user related error
-export const InvalidHashUserIdError = new InternalError(
-    'Invalid hashUserId',
-    400
-)
 export const UserAlreadySignedUpError = new InternalError(
-    'The user has already signed up.',
+    'the user has already signed up.',
     400
 )
-export const UserLoginError = new InternalError('Error in login', 400)
-
 // general error
-export const InvalidEpochError = new InternalError('Invalid Epoch', 400)
-export const InvalidAttesterIdError = new InternalError('Wrong attesterId', 400)
-export const InvalidProofError = new InternalError('Invalid proof', 400)
-export const InvalidStateTreeError = new InternalError(
-    'Invalid State Tree',
-    400
-)
+export const InvalidProofError = new InternalError('invalid proof', 400);
 
 // vote/post related error
-export const InvalidPostIdError = new InternalError('Invalid postId', 400)
-export const InvalidVoteActionError = new InternalError(
-    'Invalid vote action',
-    400
-)
+export const UserAlreadyVotedError = new InternalError("the user is voted for the post", 400);
+export const PostNotFoundError = new InternalError("post not found", 400);
+export const InvalidVoteTypeError = new InternalError("invalid vote type", 400);

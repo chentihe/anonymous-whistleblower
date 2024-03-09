@@ -1,4 +1,4 @@
-import { VoteSchema, VoteType } from '../types';
+import { InvalidProofError, InvalidVoteTypeError, PostNotFoundError, VoteSchema, VoteType } from '../types';
 import PostDao from '../daos/PostDao';
 import VoteDao from '../daos/VoteDao';
 import { Contract } from 'ethers';
@@ -18,16 +18,14 @@ export default class VoteService {
         this.imtService = imtService;
     }
 
-    // TODO: need to send tx to eth
     async sendVote(proof: IMTMerkleProof, postId: string, commitment: string, vote: VoteType): Promise<any> {
         if (!this.imtService.verifyProof(proof)) {
-            throw new Error("invalid proof");
+            throw InvalidProofError;
         }
 
         const post = await this.postDao.getPostById(postId);
-
         if (post == null || post == undefined) {
-            throw new Error(`invalid post ${postId}`);
+            throw PostNotFoundError;
         }
 
         const newVote: VoteSchema = {
@@ -46,16 +44,17 @@ export default class VoteService {
                 newVote.result = -1;
                 break;
             default:
-                throw new Error("invalid vote type");
+                throw InvalidVoteTypeError;
         }
 
-        await this.contract.sendVote({
+        const tx = await this.contract.sendVote({
             leaf: proof.leaf,
             proofSiblings: proof.siblings,
             proofPathIndices: proof.pathIndices,
         }, postId);
-        await this.postDao.updateVotes(postId, post.votes);
+        await tx.wait();
 
+        await this.postDao.updateVotes(postId, post.votes);
         return this.voteDao.sendVote(newVote);
     }
 }

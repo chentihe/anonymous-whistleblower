@@ -9,9 +9,9 @@ export default (
     app.post(
         "/api/posts",
         errorHandler(async (req, res, _) => {
-            const { commitment, title, content } = req.body;
+            const { proof, title, content } = req.body;
             
-            const post = await config.postService.createPost(commitment, title, content);
+            const post = await config.postService.createPost(proof, title, content);
 
             res.status(201).json({ status: 'success', post: post });
         }),

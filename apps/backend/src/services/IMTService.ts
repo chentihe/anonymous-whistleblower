@@ -11,6 +11,10 @@ export default class IMTService {
         this.imt.insert(leaf);
     }
 
+    isLeafExist(leaf: bigint) {
+        return this.imt.indexOf(leaf) != -1 ? true : false;
+    }
+
     generateProof(leaf: bigint) {
         const index = this.imt.indexOf(leaf);
         return this.imt.createProof(index);

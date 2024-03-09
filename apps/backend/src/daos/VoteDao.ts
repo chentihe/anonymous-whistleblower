@@ -1,5 +1,5 @@
 import { D1Orm, DataTypes, Model } from 'd1-orm';
-import { VoteSchema } from '../types';
+import { UserAlreadyVotedError, VoteSchema } from '../types';
 
 export default class VoteDao {
     private voteDao;
@@ -43,7 +43,7 @@ export default class VoteDao {
         })
 
         if (vote != null || vote != undefined) {
-            throw new Error("the user is voted for the post");
+            throw UserAlreadyVotedError;
         }
 
         return this.voteDao.InsertOne(newVote);

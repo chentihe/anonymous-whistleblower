@@ -37,7 +37,6 @@ export default class PostDao {
           );
     }
 
-    // TODO: need to send tx to eth
     async createPost(post: PostSchema): Promise<any> {
         return this.postDao.InsertOne(post);
     }
