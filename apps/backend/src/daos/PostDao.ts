@@ -32,6 +32,11 @@ export default class PostDao {
                 type: DataTypes.INT,
                 notNull: true,
                 defaultValue: 0,
+              },
+              createdAt: {
+                type: DataTypes.INT,
+                notNull: false,
+                defaultValue: new Date().getTime()
               }
             }
           );
@@ -41,11 +46,11 @@ export default class PostDao {
         return this.postDao.InsertOne(post);
     }
 
-    // orderBy desc createdAt
     async getPosts(offset: number): Promise<any> {
         return this.postDao.All({
             limit: 10,
             offset: offset,
+            orderBy: { column: 'createdAt', descending: true, nullLast: true },
           });
     }
 
@@ -56,6 +61,7 @@ export default class PostDao {
             },
             offset: offset,
             limit: 10,
+            orderBy: { column: 'createdAt', descending: true, nullLast: true },
         });
     }
 

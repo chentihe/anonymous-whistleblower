@@ -28,6 +28,11 @@ export default class VoteDao {
               voteResult: {
                 type: DataTypes.INT,
                 notNull: true,
+              },
+              createdAt: {
+                type: DataTypes.INT,
+                notNull: false,
+                defaultValue: new Date().getTime()
               }
             }
           );

@@ -17,6 +17,8 @@ export default (
         }),
     );
 
+    // TODO: need to show up the user is voted or not
+    // so frontend can display correspondingly
     app.get(
         "/api/posts",
         errorHandler(async (req, res, _) => {
